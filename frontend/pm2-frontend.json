@@ -1,0 +1,14 @@
+{
+    "apps": [
+        {
+            "name": "frontend",
+            "script": "npm",
+            "args": "run serve",
+            "cwd": "/home/ec2-user/app/frontend",
+            "env": {
+                "NODE_ENV": "production",
+                "PORT": 8080
+            }
+        }
+    ]
+}

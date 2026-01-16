@@ -1,0 +1,10 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - echo "Deploying Backend..."
+      # In a real CodePipeline, you would use CodeDeploy or 
+      # run these commands via SSH or Systems Manager.
+      # This script assumes it's being triggered for deployment.
+      - bash scripts/backend-deploy.sh
