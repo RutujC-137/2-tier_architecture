@@ -1,51 +1,56 @@
-# AWS 2-Tier Single EC2 Web Application
+# AWS 2-Tier Automated Deployment: Status Report
 
-This project is a boilerplate for deploying a 2-tier application (Node.js backend + React frontend) on a single AWS EC2 instance using PM2.
+**Architecture:** React (Frontend) + Node.js (Backend) on a Single AWS EC2.
 
-## Project Structure
+---
 
-```
-aws-2tier-single-ec2/
-│
-├── frontend/           # React application
-│   ├── pm2-frontend.json
-│   └── ...
-│
-├── backend/            # Express.js API
-│   ├── pm2-backend.json
-│   └── ...
-│
-├── scripts/            # Deployment scripts for EC2
-│   ├── frontend-deploy.sh
-│   └── backend-deploy.sh
-│
-├── buildspec-frontend.yml  # AWS CodeBuild spec for Frontend
-├── buildspec-backend.yml   # AWS CodeBuild spec for Backend
-└── README.md
-```
+## 1. Accomplishments (What we have done)
 
-## How to Deploy (EC2 Steps)
+We have successfully moved the project from a local folder to a cloud-ready environment.
 
-1. **Setup EC2 (Amazon Linux 2)**
-   - Open ports 22, 80, 3000, 8080.
-   - Install Node.js & PM2.
+* **Version Control:** Initialized Git and pushed the complete 2-tier codebase to GitHub.
+* **CI/CD Pipeline:** Configured AWS CodePipeline and CodeBuild to trigger automatically on every `git push`.
+* **Cloud Infrastructure:** Provisioned an AWS EC2 instance and manually verified the environment.
+* **Process Management:** Successfully utilized **PM2** to manage the Node.js server and serve the static React production build.
+* **Local Stability:** Verified that the app runs locally on Port 5000 (Backend) and Port 3000 (Frontend).
 
-2. **Clone the Repo**
-   - Push this code to your GitHub.
-   - Clone to `/home/ec2-user/app` on EC2.
+---
 
-3. **PM2 Setup**
-   ```bash
-   pm2 startup
-   # Run the command provided by pm2 startup
-   pm2 save
-   ```
+## 2. Current Technical Roadblocks
 
-4. **CodePipeline**
-   - Set up two pipelines (one for frontend, one for backend).
-   - Use the respective `buildspec-*.yml` files.
+We are addressing three specific "handshake" issues to ensure full online functionality:
 
-## Traffic Flow
-- **Port 80 (Nginx)**: Proxy to 8080 (Frontend) and 3000 (Backend /api).
-- **Port 8080**: Frontend (PM2)
-- **Port 3000**: Backend (PM2)
+* **A. Entry Point Mapping:** Ensuring the PM2 `serve` command correctly maps to the `index.html` file inside the `frontend/build` folder.
+* **B. Port Management:** Realigned Backend to Port 5000 and Frontend to Port 3000 to prevent collisions on the EC2 instance.
+* **C. Network Connectivity:** Updating **Security Group** rules to allow Inbound TCP on Ports 3000 and 5000, and pointing the Frontend to the EC2's Public IP (`35.154.88.155`).
+
+---
+
+## 3. Action Plan (Next Steps)
+
+1. **Port Realignment:** [COMPLETED] Backend on 5000, Frontend on 3000.
+2. **Security Group Update:** Open Inbound TCP Ports 3000 and 5000 in the AWS Console.
+3. **Dynamic IP Configuration:** Update React Frontend API calls to use the EC2 Public IP.
+4. **Pipeline Automation:** Finalize `buildspec.yml` with AWS Systems Manager (SSM) for zero-SSH deployments.
+
+---
+
+## 4. Summary Status
+
+* **Code:** 100% Complete.
+* **Pipeline:** 90% Configured.
+* **Deployment:** **In Progress** (Networking/Configuration Refinement).
+
+---
+
+## Technical Details
+
+### Backend
+- **Path:** `/var/www/my-app/backend`
+- **Port:** 5000
+- **Process:** PM2 `backend`
+
+### Frontend
+- **Path:** `/var/www/my-app/frontend`
+- **Port:** 3000
+- **Process:** PM2 `frontend`

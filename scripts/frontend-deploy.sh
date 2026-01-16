@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Navigate to frontend directory
-cd /home/ec2-user/app/frontend
+cd /var/www/my-app/frontend
 
 # Install dependencies (only needed if serve or scripts change)
 npm install

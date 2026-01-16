@@ -17,4 +17,4 @@ phases:
       - echo "Triggering Deployment on EC2 via SSM..."
       # REPLACE YOUR_INSTANCE_ID with your actual ID (e.g., i-07e0c4...)
       - INSTANCE_ID="i-06a633561279ca141"
-      - aws ssm send-command --instance-ids "$INSTANCE_ID" --document-name "AWS-RunShellScript" --parameters 'commands=["cd /var/www/my-app && git pull origin main", "cd /var/www/my-app/backend && npm install && pm2 restart backend || pm2 start server.js --name backend", "cd /var/www/my-app/frontend && npm install && npm run build && pm2 restart frontend || pm2 start \"npm run serve\" --name frontend"]'
+      - aws ssm send-command --instance-ids "$INSTANCE_ID" --document-name "AWS-RunShellScript" --parameters 'commands=["bash /var/www/my-app/scripts/deploy-all.sh"]'

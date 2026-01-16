@@ -2,12 +2,12 @@
     "apps": [
         {
             "name": "frontend",
-            "script": "npm",
-            "args": "run serve",
-            "cwd": "/home/ec2-user/app/frontend",
+            "script": "serve",
+            "args": "-s build -l 3000",
+            "cwd": "/var/www/my-app/frontend",
             "env": {
                 "NODE_ENV": "production",
-                "PORT": 8080
+                "PORT": 3000
             }
         }
     ]

@@ -1,10 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const path = require("path");
 
+app.use(cors());
+
+
 // Health check endpoint
 app.get("/api/health", (req, res) => {
-  res.json({ 
+  res.json({
     status: "Backend running 🚀",
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || "development"
@@ -19,7 +23,7 @@ app.get("/api/info", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`);
 });

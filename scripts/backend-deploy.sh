@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Navigate to backend directory
-cd /home/ec2-user/app/backend
+cd /var/www/my-app/backend
 
 # Install dependencies
 npm install

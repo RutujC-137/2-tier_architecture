@@ -4,8 +4,12 @@ function App() {
     const [health, setHealth] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    // Replace with your EC2 Public IP
+    // Example: const API_URL = "http://35.154.88.155:5000";
+    const API_URL = "";
+
     useEffect(() => {
-        fetch('/api/health')
+        fetch(`${API_URL}/api/health`)
             .then(res => res.json())
             .then(data => {
                 setHealth(data);

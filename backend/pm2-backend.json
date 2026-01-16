@@ -3,10 +3,10 @@
     {
       "name": "backend",
       "script": "server.js",
-      "cwd": "/home/ec2-user/app/backend",
+      "cwd": "/var/www/my-app/backend",
       "env": {
         "NODE_ENV": "production",
-        "PORT": 3000
+        "PORT": 5000
       }
     }
   ]
